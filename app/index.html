@@ -1,64 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PosterForge — multi-panel poster cover maker</title>
-<link rel="stylesheet" href="style.css">
+<title>PosterForge — GTA-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<header id="brand-bar">
-  <div class="brand">
+<main class="app">
+  <section class="controls">
     <h1>PosterForge</h1>
-    <p>Turn a photo and a caption into multi-panel poster cover art — right in your browser, nothing uploaded.</p>
-  </div>
-  <button id="export-png" type="button">Export PNG</button>
-</header>
+    <p class="tagline">Your photos + a caption, made into a GTA-poster-style cover.</p>
 
-<main id="workbench">
-  <section id="stage">
-    <canvas id="preview" width="1920" height="1080"></canvas>
-    <p id="drop-hint">Drop photos onto the cover to add them · click a panel to select it · drag to reposition its photo · scroll to zoom</p>
-  </section>
+    <label class="field">Photos
+      <input id="photo" type="file" accept="image/*" multiple>
+    </label>
+    <div id="library" class="library" aria-label="Sample photos"></div>
 
-  <aside id="controls">
-    <section class="control-group" id="photos-group">
-      <h2>Photos</h2>
-      <label class="file-button" for="photo-input">Add photos from your machine</label>
-      <input id="photo-input" type="file" accept="image/*" multiple hidden>
-      <div id="library"></div>
-      <p class="note">Click a photo to place it in the selected panel. Your photos never leave this page.</p>
-    </section>
-
-    <section class="control-group" id="caption-group">
-      <h2>Caption</h2>
-      <label>Title <input id="title-input" type="text" maxlength="26" autocomplete="off"></label>
-      <label>Subtitle <input id="subtitle-input" type="text" maxlength="34" autocomplete="off"></label>
-    </section>
-
-    <section class="control-group" id="look-group">
-      <h2>Look</h2>
-      <label>Layout <select id="layout-select"></select></label>
-      <label>Colour grade <select id="grade-select"></select></label>
-      <label>Export size <select id="size-select"></select></label>
-    </section>
-
-    <section class="control-group" id="panels-group">
-      <h2>Panels</h2>
-      <div id="panel-list"></div>
-      <label>Zoom <input id="zoom-slider" type="range" min="1" max="3" step="0.01" value="1"> <span id="zoom-value">100%</span></label>
-      <div class="button-row">
-        <button id="fill-all" type="button">Fill all panels with this photo</button>
-        <button id="clear-panel" type="button">Clear panel</button>
+    <div class="group">
+      <span class="group-label">Layout</span>
+      <div class="row">
+        <button type="button" data-layout="duo">Duo</button>
+        <button type="button" data-layout="trio">Trio</button>
+        <button type="button" data-layout="quad" class="active">Quad</button>
+        <button type="button" data-layout="five">Five</button>
       </div>
-    </section>
-  </aside>
+    </div>
+
+    <div class="group">
+      <span class="group-label">Colour grade</span>
+      <div class="row">
+        <button type="button" data-grade="sunset" class="active">Vice Sunset</button>
+        <button type="button" data-grade="neon">Neon Nights</button>
+        <button type="button" data-grade="golden">Golden Hour</button>
+        <button type="button" data-grade="clean">Clean</button>
+      </div>
+    </div>
+
+    <label class="field">Title
+      <input id="title" type="text" maxlength="32" value="Neon Harbor">
+    </label>
+    <label class="field">Subtitle
+      <input id="subtitle" type="text" maxlength="40" value="Vice City Nights">
+    </label>
+
+    <div class="group">
+      <span class="group-label">Selected panel</span>
+      <div id="panels" class="panels"></div>
+      <label class="field">Zoom
+        <input id="zoom" type="range" min="1" max="3" step="0.05" value="1">
+      </label>
+      <button id="fillAll" type="button">Fill all panels</button>
+    </div>
+
+    <label class="field">Export size
+      <select id="size">
+        <option value="square" selected>1080 × 1080</option>
+        <option value="portrait">1080 × 1350</option>
+        <option value="wide">1920 × 1080</option>
+      </select>
+    </label>
+    <button id="export" type="button" class="primary">Export PNG</button>
+    <p id="status" role="status"></p>
+    <p class="hint">Click a panel to select it, drag its photo to reposition, scroll to zoom. Drop photos straight onto the preview.</p>
+  </section>
+  <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
 </main>
-
-<footer id="colophon">
-  <p>PosterForge paints every cover locally on a canvas: slanted panels, a sunset-or-neon grade, and bold caption lettering in the Anton typeface (SIL Open Font License, see fonts/OFL.txt).</p>
-</footer>
-
-<script type="module" src="src/main.js"></script>
+<script type="module" src="./src/main.js"></script>
 </body>
 </html>

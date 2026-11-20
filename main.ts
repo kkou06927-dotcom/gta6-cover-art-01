@@ -1,14 +1,17 @@
 // PosterForge — my entry for gta6-cover-art-01 (Node 22, standard library only).
+// The app is the plain static folder app/ beside this file: index.html and its
+// ES modules, no library and no network request, so a desktop browser can open
+// it offline. This program hands it in: it copies app/ and screenshots/ to
+// /output and writes /output/dossier.json, the summary the judge reads, using
+// the vendored make.fun library. The cover maker itself lives in
+// app/src/cover.js: a DOM-free Canvas2D core that paints a multi-panel
+// GTA-style poster — slanted panels, per-panel photos with focus and zoom,
+// painted backdrops where a panel is empty, four colour grades, and a big
+// Anton caption — and exports it as a PNG. The two kit sample photos in
+// app/samples/ were made for make.fun with an image model and are free to use.
+// Screenshots live in screenshots/ (the first by name is the cover).
 //
-// The app itself lives in app/: plain static files a desktop browser opens offline (app/index.html plus its ES
-// modules, no library, no network request). It is a multi-panel poster maker: drop in your own photos, arrange
-// them across slanted panels, stamp a big two-line caption over a sunset or neon grade, and export a PNG in the
-// usual post sizes. This program is only the delivery van — it copies app/ and screenshots/ from beside this
-// file into the output directory and writes dossier.json there with the vendored make.fun library, which is
-// the summary the judge reads. The two photos in app/samples/ were made for make.fun with an image model and
-// are free to use.
-//
-// Try the app locally with `node serve.ts`, then open http://localhost:8080.
+// Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
@@ -40,4 +43,4 @@ writeFileSync(
   }),
 );
 
-console.log(`PosterForge handed in: app/ and screenshots/ copied to ${out}, dossier.json written.`);
+console.log('PosterForge handed in: app/ and screenshots/ copied, dossier.json written.');
