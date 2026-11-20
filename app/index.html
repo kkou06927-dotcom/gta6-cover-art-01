@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PosterForge — multi-panel poster cover maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="brand-bar">
+  <div class="brand">
+    <h1>PosterForge</h1>
+    <p>Turn a photo and a caption into multi-panel poster cover art — right in your browser, nothing uploaded.</p>
+  </div>
+  <button id="export-png" type="button">Export PNG</button>
+</header>
+
+<main id="workbench">
+  <section id="stage">
+    <canvas id="preview" width="1920" height="1080"></canvas>
+    <p id="drop-hint">Drop photos onto the cover to add them · click a panel to select it · drag to reposition its photo · scroll to zoom</p>
+  </section>
+
+  <aside id="controls">
+    <section class="control-group" id="photos-group">
+      <h2>Photos</h2>
+      <label class="file-button" for="photo-input">Add photos from your machine</label>
+      <input id="photo-input" type="file" accept="image/*" multiple hidden>
+      <div id="library"></div>
+      <p class="note">Click a photo to place it in the selected panel. Your photos never leave this page.</p>
+    </section>
+
+    <section class="control-group" id="caption-group">
+      <h2>Caption</h2>
+      <label>Title <input id="title-input" type="text" maxlength="26" autocomplete="off"></label>
+      <label>Subtitle <input id="subtitle-input" type="text" maxlength="34" autocomplete="off"></label>
+    </section>
+
+    <section class="control-group" id="look-group">
+      <h2>Look</h2>
+      <label>Layout <select id="layout-select"></select></label>
+      <label>Colour grade <select id="grade-select"></select></label>
+      <label>Export size <select id="size-select"></select></label>
+    </section>
+
+    <section class="control-group" id="panels-group">
+      <h2>Panels</h2>
+      <div id="panel-list"></div>
+      <label>Zoom <input id="zoom-slider" type="range" min="1" max="3" step="0.01" value="1"> <span id="zoom-value">100%</span></label>
+      <div class="button-row">
+        <button id="fill-all" type="button">Fill all panels with this photo</button>
+        <button id="clear-panel" type="button">Clear panel</button>
+      </div>
+    </section>
+  </aside>
+</main>
+
+<footer id="colophon">
+  <p>PosterForge paints every cover locally on a canvas: slanted panels, a sunset-or-neon grade, and bold caption lettering in the Anton typeface (SIL Open Font License, see fonts/OFL.txt).</p>
+</footer>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
